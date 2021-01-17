@@ -24,3 +24,17 @@ router.get("/api/workouts/range", (req, res) => {
         res.json(error)
     })
 })
+
+router.put("/api/workouts/:id", (req, res) => {
+    Workout.findByIdAndUpdate(req.params.id, {
+        $push:{exercises: req.body}
+    },{
+        useFindAndModify:false
+    }).then(results => {
+        res.json(results)
+    }).catch(error => {
+        res.json(error)
+    })
+})
+
+module.exports = router;
